@@ -1,0 +1,16 @@
+---
+- include_tasks: update_repository.yml
+
+- include_tasks: install_epel.yml
+
+- include_tasks: install_nginx.yml
+
+- include_tasks: install_php.yml
+
+- include_tasks: configure_php-module.yml
+
+- include_tasks: directory_structure.yml
+  tags: new
+
+- include_tasks: configure_nginx.yml
+  tags: new
