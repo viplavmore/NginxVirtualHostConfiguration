@@ -1,0 +1,9 @@
+---
+- hosts: LEMP
+  become: yes
+  vars_prompt:
+    - name: vh
+      prompt: "Enter Virtual Host Name "
+      private: no
+  roles:
+    - role: LEMP
