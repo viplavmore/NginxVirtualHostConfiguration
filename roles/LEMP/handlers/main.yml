@@ -1,0 +1,72 @@
+---
+################# START NGINX ####################
+- name: sys start nginx
+  systemd:
+    name: nginx
+    state: started
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
+
+- name: start nginx
+  service: name=nginx state=started
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'
+##################################################
+
+############### RESTART NGINX ####################
+- name: sys restart nginx
+  systemd:
+    name: nginx
+    state: restarted
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
+
+- name: restart nginx
+  service: name=nginx state=restarted
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'
+##################################################
+
+################# RELOAD NGINX ###################
+- name: sys reload nginx
+  systemd:
+    name: nginx
+    state: reloaded
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
+
+- name: reload nginx
+  service: name=nginx state=reloaded
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'
+##################################################
+
+############### START PHP-FPM ####################
+- name: sys start php-fpm
+  systemd:
+    name: php-fpm
+    state: started
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
+
+- name: start php-fpm
+  service: name=php-fpm state=started
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'
+##################################################
+
+############### RESTART PHP-FPM ##################
+- name: sys restart php-fpm
+  systemd:
+    name: php-fpm
+    state: restarted
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
+
+- name: restart php-fpm
+  service: name=php-fpm state=restarted
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'
+##################################################
+
+################# RELOAD PHP-FPM #################
+- name: sys reload php-fpm
+  systemd:
+    name: php-fpm
+    state: reloaded
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
+
+- name: reload php-fpm
+  service: name=php-fpm state=reloaded
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'
+##################################################
