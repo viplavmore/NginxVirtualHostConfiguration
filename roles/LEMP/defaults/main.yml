@@ -1,0 +1,5 @@
+---
+phppkg:
+ - php
+ - php-mysql
+ - php-fpm
