@@ -1,0 +1,19 @@
+---
+################ CONFIGURE PHP #################
+- name: Edit Main php-fpm configuration file
+  lineinfile: dest=/etc/php.ini regexp='^;cgi.fix_pathinfo=1$' line='cgi.fix_pathinfo=0'
+################################################
+
+############# CONFIGURE PHP-FPM ################
+- name: Edit php-fpm configuration file
+  copy: src=files/www.conf dest=/etc/php-fpm.d/www.conf
+  notify:
+  - restart php-fpm
+  - sys restart php-fpm
+
+#- name: restart php-fpm
+#  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'
+
+#- name: sys restart php-fpm
+#  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
+################################################

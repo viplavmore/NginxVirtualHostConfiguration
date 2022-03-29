@@ -1,0 +1,16 @@
+---
+- name: Install PHP modules
+  action: yum name={{ item }} state=present
+  with_items: "{{ phppkg }}"
+  notify:
+  - start php-fpm
+  - sys start php-fpm
+
+#- name: start php-fpm
+#  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'
+
+#- name: sys start php-fpm 
+#  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
+
+- name: Enable "php-fpm" service on boot
+  service: name=php-fpm enabled=yes

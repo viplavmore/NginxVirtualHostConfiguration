@@ -1,0 +1,27 @@
+---
+############# CONFIGURE NGINX ##################
+- name: Edit Nginx Configuration file
+  copy: src=files/nginx.conf dest=/etc/nginx/nginx.conf
+
+- name: Edit Virtual Host
+  copy: src=files/default.conf dest=/etc/nginx/conf.d/{{ vh }}.conf
+  tags: new
+
+- name: Edit VH configuration file
+  replace:
+    path: /etc/nginx/conf.d/{{ vh }}.conf
+    regexp: 'virtualhost'
+    replace: '{{ vh }}'
+  notify:
+  - restart nginx
+  - sys restart nginx
+  tags: new
+
+#- name: restart nginx
+#  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'
+#  tags: new
+
+#- name: sys restart nginx
+#  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
+#  tags: new
+################################################
