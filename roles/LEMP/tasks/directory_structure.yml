@@ -1,0 +1,38 @@
+---
+############ DIRECTORY STRUCTURE ###############
+- name: Making Directory Structure for Document Root
+#  file: path=/opt/{{ item[0] }}/{{ item[1] }}/{{ item[2] }} recurse=yes state=directory
+  file: path=/opt/{{ item[0] }}/{{ item[1] }} recurse=yes state=directory
+  with_nested:
+  - [ 'www' ]
+  - [ 'html' ]
+#  - [ '{{ vh }}' ]
+
+- name: Create Document Root
+  file: 
+    path: "/opt/www/html/{{ vh }}"
+    state: directory
+  tags: new
+
+- name: Making Directory Structure for VH Configuration file
+  file: path=/etc/nginx/logs state=directory
+#  file: path=/etc/nginx/{{ item[0] }} state=directory
+#  with_nested:
+#  - [ 'logs' ]
+# Above commented line not works for single directory
+################################################
+
+########### SSL DIRECTORY STRUCTURE ############
+- name: Create SSL Directory
+  file: path=/etc/nginx/domain state=directory
+
+#- name: Move All certificate in "domain" directory
+#  copy: src=files/^www dest=/etc/nginx/domain/
+
+- name: move file
+  copy:
+    src: "{{ item }}"
+    dest: /etc/nginx/domain/
+  with_fileglob:
+    - "files/certs/*"
+################################################
